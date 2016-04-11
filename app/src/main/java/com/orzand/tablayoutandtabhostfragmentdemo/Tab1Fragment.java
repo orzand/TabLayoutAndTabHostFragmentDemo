@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -66,13 +67,22 @@ public class Tab1Fragment extends Fragment {
 		for (int i = 0; i < tbl.getTabCount(); i++) {
 			TabLayout.Tab tab = tbl.getTabAt(i);
 
-//            View view = getTabView(i);
-//            if (i == 0) {
-//                view.setSelected(true);
-//            }
+			//            View view = getTabView(i);
+			//            if (i == 0) {
+			//                view.setSelected(true);
+			//            }
 
 			tab.setCustomView(getTabView(i));
 		}
+
+		getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager
+				.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+		int result = 0;
+		int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+		if (resourceId > 0) {
+			result = getResources().getDimensionPixelSize(resourceId);
+		}
+		tbl.setPadding(0, result, 0, 0);
 	}
 
 	private View getTabView(int position) {
