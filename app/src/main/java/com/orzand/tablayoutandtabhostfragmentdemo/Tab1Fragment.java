@@ -1,5 +1,7 @@
 package com.orzand.tablayoutandtabhostfragmentdemo;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -23,6 +25,15 @@ public class Tab1Fragment extends Fragment {
 	private ViewPager vp;
 	private boolean created = false;
 	private ArrayList<Fragment> fragments;
+
+	public static int getStatusBarHeight(Context context) {
+		int result = 0;
+		int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
+		if (resourceId > 0) {
+			result = context.getResources().getDimensionPixelSize(resourceId);
+		}
+		return result;
+	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -65,27 +76,17 @@ public class Tab1Fragment extends Fragment {
 
 		// setup custom tab
 		for (int i = 0; i < tbl.getTabCount(); i++) {
-			TabLayout.Tab tab = tbl.getTabAt(i);
-
-			//            View view = getTabView(i);
-			//            if (i == 0) {
-			//                view.setSelected(true);
-			//            }
-
-			tab.setCustomView(getTabView(i));
+			tbl.getTabAt(i).setCustomView(getTabView(i));
 		}
 
+		// 修改状态栏颜色
 		getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager
 				.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-		int result = 0;
-		int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
-		if (resourceId > 0) {
-			result = getResources().getDimensionPixelSize(resourceId);
-		}
-		tbl.setPadding(0, result, 0, 0);
+		tbl.setPadding(0, getStatusBarHeight(getContext()), 0, 0);
 	}
 
 	private View getTabView(int position) {
+		@SuppressLint("InflateParams")
 		View view = LayoutInflater.from(getContext()).inflate(R.layout.tab_title, null);
 
 		TextView textView = (TextView) view.findViewById(R.id.tv_tab_title);
