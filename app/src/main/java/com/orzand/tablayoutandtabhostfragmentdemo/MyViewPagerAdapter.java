@@ -1,6 +1,5 @@
 package com.orzand.tablayoutandtabhostfragmentdemo;
 
-import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -12,13 +11,11 @@ public class MyViewPagerAdapter extends FragmentPagerAdapter {
 
 	private ArrayList<Fragment> fragments;
 	//	private FragmentManager fragmentManager;
-	private Context context;
 
-	public MyViewPagerAdapter(FragmentManager fm, ArrayList<Fragment> fragments, Context context) {
+	public MyViewPagerAdapter(FragmentManager fm, ArrayList<Fragment> fragments) {
 		super(fm);
 		this.fragments = fragments;
 		//		this.fragmentManager = fm;
-		this.context = context;
 	}
 
 	@Override

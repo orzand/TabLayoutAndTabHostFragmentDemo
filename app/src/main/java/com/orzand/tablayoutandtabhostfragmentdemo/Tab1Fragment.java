@@ -68,7 +68,7 @@ public class Tab1Fragment extends Fragment {
 			fragments.add(Page1Fragment.getInstance(title));
 		}
 
-		MyViewPagerAdapter adapter = new MyViewPagerAdapter(getChildFragmentManager(), fragments, getContext());
+		MyViewPagerAdapter adapter = new MyViewPagerAdapter(getChildFragmentManager(), fragments);
 		vp.setAdapter(adapter);
 
 		tbl.setupWithViewPager(vp);
